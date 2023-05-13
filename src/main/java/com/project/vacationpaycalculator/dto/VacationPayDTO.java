@@ -6,5 +6,5 @@ import lombok.Getter;
 @AllArgsConstructor()
 public class VacationPayDTO {
     @Getter
-    private int totalVacationPay;
+    private float totalVacationPay;
 }

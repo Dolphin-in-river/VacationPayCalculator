@@ -1,5 +1,6 @@
 package com.project.vacationpaycalculator.controller;
 
+import com.project.vacationpaycalculator.attributes.CustomErrorAttributes;
 import com.project.vacationpaycalculator.dto.VacationPayDTO;
 import com.project.vacationpaycalculator.service.VacationService;
 import com.project.vacationpaycalculator.service.VacationServiceImpl;
@@ -22,15 +23,6 @@ import java.util.List;
 @ComponentScan("com.project.vacationpaycalculator")
 @RestController
 public class VacationController {
-//    @Bean
-//    public ErrorAttributes errorAttributes() {
-//        return new DefaultErrorAttributes();
-//    }
-
-//    @Bean
-//    public CustomErrorController customErrorController(ErrorAttributes errorAttributes) {
-//        return new CustomErrorController(errorAttributes);
-//    }
 
     @GetMapping("/calculate")
     public VacationPayDTO calculate(@RequestParam int avgMonthlySalary,

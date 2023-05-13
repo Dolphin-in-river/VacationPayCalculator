@@ -8,21 +8,24 @@ import java.util.List;
 
 @NoArgsConstructor
 public class VacationServiceImpl implements VacationService {
+    final int NUMBER_OF_MONTHS = 12;
+    final int NUMBER_OF_DAYS_PER_YEAR = 365;
+
     @Override
     public VacationPayDTO calculate(int avgMonthlySalary, int vacationDays, List<LocalDate> dates) {
-        int totalVacationPay;
-        if (dates == null) {
-            totalVacationPay = avgMonthlySalary * 12 * vacationDays / 365;
-        } else {
-            totalVacationPay = 0;
+        float totalVacationPay;
+        if (dates != null) {
             for (LocalDate date : dates) {
-                if (!HolidayService.isHoliday(date) && !HolidayService.isWeekend(date)) {
-                    totalVacationPay += avgMonthlySalary / 30;
+                if (HolidayService.isWeekend(date) || HolidayService.isHoliday(date)) {
                     vacationDays--;
                 }
             }
-            totalVacationPay += avgMonthlySalary * vacationDays / 30;
         }
+        totalVacationPay = getTotalVacationPay(avgMonthlySalary, vacationDays);
         return new VacationPayDTO(totalVacationPay);
+    }
+
+    private int getTotalVacationPay(int avgMonthlySalary, int vacationDays) {
+        return avgMonthlySalary * NUMBER_OF_MONTHS * vacationDays / NUMBER_OF_DAYS_PER_YEAR;
     }
 }

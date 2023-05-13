@@ -1,0 +1,47 @@
+package com.project.vacationpaycalculator.controller;
+
+import com.project.vacationpaycalculator.dto.VacationPayDTO;
+import com.project.vacationpaycalculator.service.VacationService;
+import com.project.vacationpaycalculator.service.VacationServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Configuration
+@ComponentScan("com.project.vacationpaycalculator")
+@RestController
+public class VacationController {
+//    @Bean
+//    public ErrorAttributes errorAttributes() {
+//        return new DefaultErrorAttributes();
+//    }
+
+//    @Bean
+//    public CustomErrorController customErrorController(ErrorAttributes errorAttributes) {
+//        return new CustomErrorController(errorAttributes);
+//    }
+
+    @GetMapping("/calculate")
+    public VacationPayDTO calculate(@RequestParam int avgMonthlySalary,
+                                    @RequestParam int vacationDays,
+                                    @RequestParam(required = false) List<LocalDate> dates) {
+        try {
+            VacationService service = new VacationServiceImpl();
+            return service.calculate(avgMonthlySalary, vacationDays, dates);
+        }
+        catch (IllegalArgumentException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid request parameter", ex);
+        }
+    }
+}

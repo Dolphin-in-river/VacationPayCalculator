@@ -1,13 +1,8 @@
 package com.project.vacationpaycalculator.controller;
 
-import com.project.vacationpaycalculator.attributes.CustomErrorAttributes;
 import com.project.vacationpaycalculator.dto.VacationPayDTO;
 import com.project.vacationpaycalculator.service.VacationService;
 import com.project.vacationpaycalculator.service.VacationServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
-import org.springframework.boot.web.servlet.error.ErrorAttributes;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;

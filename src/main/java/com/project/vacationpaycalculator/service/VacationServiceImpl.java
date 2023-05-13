@@ -1,17 +1,18 @@
 package com.project.vacationpaycalculator.service;
 
 import com.project.vacationpaycalculator.dto.VacationPayDTO;
-import com.project.vacationpaycalculator.service.VacationService;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@NoArgsConstructor
 public class VacationServiceImpl implements VacationService {
     @Override
     public VacationPayDTO calculate(int avgMonthlySalary, int vacationDays, List<LocalDate> dates) {
         int totalVacationPay;
         if (dates == null) {
-            totalVacationPay = avgMonthlySalary * vacationDays / 30;
+            totalVacationPay = avgMonthlySalary * 12 * vacationDays / 365;
         } else {
             totalVacationPay = 0;
             for (LocalDate date : dates) {
